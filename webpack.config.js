@@ -14,5 +14,18 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader'
+          // 'handlebars-loader', // handlebars loader expects raw resource string
+          // 'extract-loader'
+        ]
+      }
+    ]
+  }
 }

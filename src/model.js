@@ -1,33 +1,27 @@
+import {
+  TitleBlock,
+  TextBlock,
+  TextColumnsBlock,
+  ImageBlock
+} from '../classes/blocks.js'
+
 export const model = [
-  {
-    type: 'title',
-    value: 'Алексей Плещеев',
-    options: {
-      styles: `color: #fff; text-align: center; font-family: Georgia, serif;
+  new TitleBlock('Алексей Плещеев', {
+    styles: `color: #fff; text-align: center; font-family: Georgia, serif;
         font-size: 25px; letter-spacing: 2px; word-spacing: 2px;
         font-variant: small-caps; padding-top: 50px`,
-      tag: 'h2'
-    }
-  },
-  {
-    type: 'text',
-    value: 'Осень наступила, высохли цветы',
-    options: {
-      styles: `text-align: center; font-family: Arial, Helvetica, sans-serif;
+    tag: 'h2'
+  }).toHTML(),
+  new TextBlock('Осень наступила, высохли цветы', {
+    styles: `text-align: center; font-family: Arial, Helvetica, sans-serif;
         font-size: 20px; font-weight: 700; padding-top: 20px`
-    }
-  },
-  {
-    type: 'image',
-    value: 'golden_autumn.jpg',
-    options: {
-      styles: `text-align: center; padding-top: 20px`,
-      description: 'Иван Иванович Шишкин – Ранняя осень 1889'
-    }
-  },
-  {
-    type: 'textColumns',
-    value: [
+  }).toHTML(),
+  new ImageBlock('golden_autumn.jpg', {
+    styles: `text-align: center; padding-top: 20px`,
+    alt: 'Иван Иванович Шишкин – Ранняя осень 1889'
+  }).toHTML(),
+  new TextColumnsBlock(
+    [
       `      Осень наступила,
       Высохли цветы,
       И глядят уныло
@@ -48,10 +42,10 @@ export const model = [
       Птички улетели
       В теплые края.`
     ],
-    options: {
+    {
       styles: `white-space: pre-wrap; text-align: justify; padding-top: 50px;
         font-family: Verdana; font-size: 16px; font-weight: 700; 
         padding-bottom: 200px; padding-left: 150px; padding-right: 100px`
     }
-  }
+  ).toHTML()
 ]

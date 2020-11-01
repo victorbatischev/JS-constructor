@@ -25,6 +25,14 @@ module.exports = {
           // 'handlebars-loader', // handlebars loader expects raw resource string
           // 'extract-loader'
         ]
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
       }
     ]
   }

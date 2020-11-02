@@ -2,24 +2,44 @@ import {
   TitleBlock,
   TextBlock,
   TextColumnsBlock,
-  ImageBlock
-} from '../classes/blocks.js'
+  ImageBlock,
+  CustomBlock
+} from './classes/blocks.js'
+import { css } from './utils'
 
 export const model = [
+  new CustomBlock(`<div id="leaves">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>`),
   new TitleBlock('Алексей Плещеев', {
-    styles: `color: #fff; text-align: center; font-family: Georgia, serif;
-        font-size: 25px; letter-spacing: 2px; word-spacing: 2px;
-        font-variant: small-caps; padding-top: 50px`,
+    styles: css({
+      color: '#fff',
+      'text-align': 'center',
+      'font-family': 'Georgia, serif',
+      'font-size': '25px',
+      'letter-spacing': '2px',
+      'word-spacing': '2px',
+      'font-variant': 'small-caps',
+      'padding-top': '50px'
+    }),
     tag: 'h2'
-  }).toHTML(),
+  }),
   new TextBlock('Осень наступила, высохли цветы', {
-    styles: `text-align: center; font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px; font-weight: 700; padding-top: 20px`
-  }).toHTML(),
+    styles: css({
+      'text-align': 'center',
+      'font-family': 'Arial, Helvetica, sans-serif',
+      'font-size': '20px',
+      'font-weight': '700',
+      'padding-top': '20px'
+    })
+  }),
   new ImageBlock('golden_autumn.jpg', {
-    styles: `text-align: center; padding-top: 20px`,
+    styles: css({ 'text-align': 'center', 'padding-top': '20px' }),
     alt: 'Иван Иванович Шишкин – Ранняя осень 1889'
-  }).toHTML(),
+  }),
   new TextColumnsBlock(
     [
       `      Осень наступила,
@@ -43,9 +63,17 @@ export const model = [
       В теплые края.`
     ],
     {
-      styles: `white-space: pre-wrap; text-align: justify; padding-top: 50px;
-        font-family: Verdana; font-size: 16px; font-weight: 700; 
-        padding-bottom: 200px; padding-left: 150px; padding-right: 100px`
+      styles: css({
+        'white-space': 'pre-wrap',
+        'text-align': 'justify',
+        'padding-top': '50px',
+        'font-family': 'Verdana',
+        'font-size': '16px',
+        'font-weight': '700',
+        'padding-bottom': '200px',
+        'padding-left': '150px',
+        'padding-right': '100px'
+      })
     }
-  ).toHTML()
+  )
 ]

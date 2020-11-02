@@ -1,4 +1,4 @@
-import { col, row } from '../src/utils.js'
+import { col, row } from '../utils.js'
 
 export class Block {
   constructor(value, options) {
@@ -54,8 +54,18 @@ export class ImageBlock extends Block {
   toHTML() {
     const { alt, styles } = this.options
     return row(
-      col(`<img src="./img/${this.value}" alt="${alt}" height="250">`),
+      col(`<img src="./src/assets/${this.value}" alt="${alt}" height="250">`),
       styles
     )
+  }
+}
+
+export class CustomBlock extends Block {
+  constructor(value, options) {
+    super(value, options)
+  }
+
+  toHTML() {
+    return row(this.value)
   }
 }

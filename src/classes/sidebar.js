@@ -6,6 +6,14 @@ import {
   CustomBlock
 } from './blocks'
 
+import {
+  TitleForm,
+  TextForm,
+  TextColumnsForm,
+  ImageForm,
+  CustomForm
+} from './forms.js'
+
 export class SideBar {
   constructor(selector, update) {
     this.$el = document.querySelector(selector)
@@ -20,38 +28,48 @@ export class SideBar {
   }
 
   get template() {
-    return [block('text'), block('title')].join('')
+    return [
+      new TitleForm().toHTML(),
+      new TextForm().toHTML(),
+      new TextColumnsForm().toHTML(),
+      new ImageForm().toHTML(),
+      new CustomForm().toHTML()
+    ].join('')
   }
 
   addBlock(event) {
     event.preventDefault()
 
-    const type = event.target.name
+    const name = event.target.name
     const value = event.target.value.value
-    const styles = event.target.styles.value
+    const styles = event.target.styles ? event.target.styles.value : ''
+    const tag = event.target.tag ? event.target.tag.value : ''
+    const alt = event.target.alt ? event.target.alt.value : ''
 
-    const Constructor = type === 'text' ? TextBlock : TitleBlock
+    let newBlock
 
-    const newBlock = new Constructor(value, { styles })
+    switch (name) {
+      case 'title':
+        newBlock = new TitleBlock(value, { styles, tag })
+        event.target.tag.value = ''
+        break
+      case 'text':
+        newBlock = new TextBlock(value, { styles })
+        break
+      case 'textColumns':
+        newBlock = new TextColumnsBlock(value.split(','), { styles })
+        break
+      case 'image':
+        newBlock = new ImageBlock(value, { styles, alt })
+        event.target.alt.value = ''
+        break
+      case 'custom':
+        newBlock = new CustomBlock(value, { styles })
+    }
+
     this.update(newBlock)
 
     event.target.value.value = ''
     event.target.styles.value = ''
   }
-}
-
-function block(type) {
-  return `
-    <form name="${type}">
-      <h5>${type}</h5>
-      <div class="form-group">
-        <input class="form-control form-control-sm" name="value" placeholder="value">
-      </div>
-      <div class="form-group">
-        <input class="form-control form-control-sm" name="styles" placeholder="styles">
-      </div>
-      <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
-    </form>
-    <hr />
-  `
 }

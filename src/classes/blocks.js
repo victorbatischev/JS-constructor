@@ -1,6 +1,6 @@
 import { col, row } from '../utils.js'
 
-export class Block {
+class Block {
   constructor(value, options) {
     this.value = value
     this.options = options
@@ -19,8 +19,8 @@ export class TitleBlock extends Block {
   }
 
   toHTML() {
-    const { options, value } = this
-    return row(col(`<${options.tag}>${value}</${options.tag}>`), options.styles)
+    const { tag, styles } = this.options
+    return row(col(`<${tag}>${this.value}</${tag}>`), styles)
   }
 }
 

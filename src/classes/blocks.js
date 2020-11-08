@@ -54,7 +54,7 @@ export class ImageBlock extends Block {
   toHTML() {
     const { alt, styles } = this.options
     return row(
-      col(`<img src="./src/assets/${this.value}" alt="${alt}" height="250">`),
+      col(`<img src="${this.value}" alt="${alt}" height="250">`),
       styles
     )
   }
@@ -66,6 +66,7 @@ export class CustomBlock extends Block {
   }
 
   toHTML() {
-    return row(this.value)
+    const { options, value } = this
+    return row(col(value), options.styles)
   }
 }

@@ -1,13 +1,13 @@
 export class Site {
-  constructor(selector) {
+  constructor(selector, remove) {
     this.$el = document.querySelector(selector)
-    this.$el.addEventListener('click', this.removeBlock.bind(this))
+    this.$el.addEventListener('dblclick', this.removeBlock.bind(this))
+    this.remove = remove
   }
 
   removeBlock(event) {
     event.preventDefault()
-
-    console.log(event.target)
+    this.remove(event.target.innerHTML || event.target.alt)
   }
 
   render(model) {
